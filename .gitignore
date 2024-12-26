@@ -1,0 +1,62 @@
+# Byte-compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Django specific
+*.log
+*.pot
+*.py[cod]
+*.sqlite3
+db.sqlite3
+
+# Media and static files
+/media
+/staticfiles
+/static
+
+# Environment variables
+.env
+
+# Virtual environments
+venv/
+env/
+*.virtualenv
+
+# IDE specific
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test coverage reports
+htmlcov/
+.coverage
+*.cover
+.hypothesis/
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre
+.pyre/
+
+# Profiling data
+.prof
+
+# Celery
+celerybeat-schedule
+
+# Other cache
+*.cache
+.cache/
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# System specific
+.DS_Store
+Thumbs.db

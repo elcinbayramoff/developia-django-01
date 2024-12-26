@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Specific{% endblock %}
+
+
+{% block content %}
+<h2>Task {{ id }}</h2>
+<ul>
+    <li>{{ name }}</li>
+    <li>{{ description }}</li>
+    <li> {{ status }} </li>
+    <li>{{ category }}</li>
+    <li>{{ deadline }}</li>
+</ul>
+
+{% endblock %}

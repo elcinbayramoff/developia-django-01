@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<h2>Tasks</h2>
+{% for task_id, task in tasks.items %}
+    <div>
+        <h3><a href="{% url 'task_specific' task_id=task_id %}">{{ task.name }}</a></h3>
+        <!-- <p>{{ task.description }}</p>
+        <p>Status: {{ task.status }}</p>
+        <p>Deadline: {{ task.deadline }}</p>
+        <p>Category: {{ task.category }}</p> -->
+    </div>
+{% empty %}
+    <h3>No tasks exist</h3>
+{% endfor %}
+
+{% endblock %}
