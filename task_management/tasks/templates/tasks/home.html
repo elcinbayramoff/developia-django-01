@@ -3,5 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h2>Home</h2>
+<div class="text-center mt-5">
+    <h2 class="text-primary">Welcome to the Task Management System!</h2>
+    <p class="lead">Manage your tasks effortlessly and stay organized.</p>
+    <a href="{% url 'tasks' %}" class="btn btn-primary mt-3">View Tasks</a>
+</div>
 {% endblock %}

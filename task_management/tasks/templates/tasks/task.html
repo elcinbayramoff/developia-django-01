@@ -3,17 +3,44 @@
 {% block title %}Tasks{% endblock %}
 
 {% block content %}
-<h2>Tasks</h2>
-{% for task_id, task in tasks.items %}
-    <div>
-        <h3><a href="{% url 'task_specific' task_id=task_id %}">{{ task.name }}</a></h3>
-        <!-- <p>{{ task.description }}</p>
-        <p>Status: {{ task.status }}</p>
-        <p>Deadline: {{ task.deadline }}</p>
-        <p>Category: {{ task.category }}</p> -->
-    </div>
-{% empty %}
-    <h3>No tasks exist</h3>
-{% endfor %}
+<div class="d-flex justify-content-between align-items-center mt-4">
+    <h2 class="text-secondary">Task List</h2>
+    <a href="#" class="btn btn-success">Add New Task</a>
+</div>
 
+<table class="table table-bordered table-hover mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task_id, task in tasks.items %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.description|default:"No description" }}</td>
+            <td>{{ task.category }}</td>
+            <td>{{ task.deadline }}</td>
+            <td>
+                <span class="badge {% if task.status == 'Completed' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                    {{ task.status }}
+                </span>
+            </td>
+            <td>
+                <a href="{% url 'task_specific' task_id %}" class="btn btn-sm btn-info">Edit</a>
+                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center text-muted">No tasks available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

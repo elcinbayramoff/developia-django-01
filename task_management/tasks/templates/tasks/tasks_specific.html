@@ -1,16 +1,58 @@
 {% extends 'base.html' %}
-
-{% block title %}Task Specific{% endblock %}
-
-
+{% block title %}Task Details{% endblock %}
 {% block content %}
-<h2>Task {{ id }}</h2>
-<ul>
-    <li>{{ name }}</li>
-    <li>{{ description }}</li>
-    <li> {{ status }} </li>
-    <li>{{ category }}</li>
-    <li>{{ deadline }}</li>
-</ul>
-
+<h2>Task Details</h2>
+<form method="post" action="#">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <input 
+            type="text" 
+            id="title" 
+            name="title" 
+            class="form-control" 
+            value="{{ title|default:'' }}" 
+            required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea 
+            id="description" 
+            name="description" 
+            class="form-control"
+        >{{ description|default:'' }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Category:</label>
+        <input 
+            type="text" 
+            id="category" 
+            name="category" 
+            class="form-control" 
+            value="{{ category|default:'' }}" 
+            required>
+    </div>
+    <div class="mb-3">
+        <label for="due_date" class="form-label">Due Date:</label>
+        <input 
+            type="date" 
+            id="due_date" 
+            name="due_date" 
+            class="form-control" 
+            value="{{ due_date|default:'' }}" 
+            required>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Status:</label>
+        <select id="status" name="status" class="form-select">
+            <option value="Pending" {% if status == "Pending" %}selected{% endif %}>Pending</option>
+            <option value="In Progress" {% if status == "In Progress" %}selected{% endif %}>In Progress</option>
+            <option value="Completed" {% if status == "Completed" %}selected{% endif %}>Completed</option>
+        </select>
+    </div>
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="#" class="btn btn-danger">Delete Task</a>
+    </div>
+</form>
 {% endblock %}
