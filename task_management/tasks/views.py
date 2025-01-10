@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Category, Task
 from django.http import HttpResponse
+
+
 # Create your views here.
 #Tasks
 DATABASE = {
@@ -49,13 +52,16 @@ def home(request):
 
 def tasks(request):
     
-    context = {'tasks':DATABASE}
+    tasks = Task.objects.all()
+    print(tasks)
+    
+    context = {'tasks':tasks}
     
     return render(request, 'tasks/task.html', context=context)
 
 def task_specific(request, task_id):
     value = DATABASE.get(task_id)
-    
+    categories = Category.objects.all()
     if value != None:
         context = {
             "id":task_id,
@@ -63,10 +69,34 @@ def task_specific(request, task_id):
             "description": DATABASE.get(task_id)['description'],
             "status": DATABASE.get(task_id)['status'],
             "category": DATABASE.get(task_id)['category'],
-            "deadline": DATABASE.get(task_id)['deadline']
+            "deadline": DATABASE.get(task_id)['deadline'],
+            'categories': categories
         }
     else:
         context = {
             'id' : task_id
         }
     return render(request, 'tasks/tasks_specific.html', context = context)
+
+
+"""
+POST
+GET
+UPDATE
+DELETE
+PATCH
+
+"""
+def task_create(request): # V
+    if request.method == 'POST':
+        title1 = request.POST['title']
+        description = request.POST['description']
+        category = request.POST['category']
+        deadline = request.POST['deadline']
+        status = request.POST['status']
+        category_obj = Category.objects.get(id=category)
+        Task.objects.create(title=title1, description=description, category=category_obj, deadline=deadline, status=status)
+        return redirect('tasks')    
+    
+    categories = Category.objects.all() #M
+    return render(request, 'tasks/task_create.html', {'categories': categories})

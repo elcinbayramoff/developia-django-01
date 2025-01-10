@@ -71,6 +71,9 @@ class Task(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     deadline = models.DateField()
     
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
     def __str__(self):
         return f'{self.title}-{self.status}-{self.category}'
 
@@ -88,5 +91,53 @@ Create
 Task.objects.create(title="Zibili at",status="pending",category=category_instance, deadline='2025-01-20')
 
 Read
-category_instance = Category.objects.get(id=3)
+.get()
+task1 = Task.objects.get(id=1)
+task1 = Task.objects.get(status='pending', deadline='2025-01-04')
+.filter()
+tasks = Task.objects.filter(status='pending') 
+task1 = tasks[0]
+task1.id
+
+tasks = Task.objects.filter(status='pending')
+tasks.first()
+<Task: Complete project report-pending-Work>
+tasks.last() 
+<Task: Yerini yig-pending-Home>
+
+
+.all()
+
+tasks = Task.objects.all()
+
+tasks.count()
+8
+
+tasks = Task.objects.filter(status='pending')
+tasks.exists()
+True
+tasks = Task.objects.filter(status='alabula') 
+tasks
+<QuerySet []>
+tasks.exists()
+False
+
+
+tasks = Task.objects.all()
+tasks.exclude(deadline='2025-01-04')
+
+Update
+task = tasks.first()
+task
+<Task: Complete project report-pending-Work>
+task.title = 'Comple project report file'
+task.save()
+
+Delete
+task = Task.objects.get(id=8)
+task.delete()
+
+
+Task.objects.all().filter().count()
+
 """

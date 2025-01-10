@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary">Edit Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+        <div class="mb-3">
+            <label for="phone_number" class="form-label">Phone Number:</label>
+            <input type="text" id="phone_number" name="phone_number" class="form-control" 
+                   value="{{ profile.phone_number|default:'' }}" placeholder="Enter your phone number">
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address:</label>
+            <textarea id="address" name="address" class="form-control" placeholder="Enter your address">{{ profile.address|default:'' }}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="profile_picture" class="form-label">Profile Picture:</label>
+            {% if profile.profile_picture %}
+                <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail mb-3" style="max-width: 150px;">
+            {% endif %}
+            <input type="file" id="profile_picture" name="profile_picture" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+    </form>
+</div>
+{% endblock %}
