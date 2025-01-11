@@ -6,7 +6,7 @@ from .models import Task, Category
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('title','description', 'category','deadline', 'status', 'created_at', 'updated_at')
+    list_display = ('id','title','description', 'category','deadline', 'status', 'created_at', 'updated_at')
     list_editable = ('status',)
     list_filter = ('category', 'deadline')
     search_fields = ('title','description')

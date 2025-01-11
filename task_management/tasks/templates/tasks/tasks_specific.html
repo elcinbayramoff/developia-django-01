@@ -11,7 +11,7 @@
             id="title" 
             name="title" 
             class="form-control" 
-            value="{{ title|default:'' }}" 
+            value="{{ task.title|default:'' }}" 
             required>
     </div>
     <div class="mb-3">
@@ -20,7 +20,7 @@
             id="description" 
             name="description" 
             class="form-control"
-        >{{ description|default:'' }}</textarea>
+        >{{ task.description|default:'' }}</textarea>
     </div>
     <div class="mb-3">
         <label for="category" class="form-label">Category:</label>
@@ -33,13 +33,13 @@
         </select>
     </div>
     <div class="mb-3">
-        <label for="due_date" class="form-label">Due Date:</label>
+        <label for="deadline" class="form-label">Deadline:</label>
         <input 
             type="date" 
-            id="due_date" 
-            name="due_date" 
+            id="deadline" 
+            name="deadline" 
             class="form-control" 
-            value="{{ due_date|default:'' }}" 
+            value="{{ task.deadline|default:'' }}" 
             required>
     </div>
     <div class="mb-3">
@@ -52,7 +52,7 @@
     </div>
     <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-primary">Save Changes</button>
-        <a href="#" class="btn btn-danger">Delete Task</a>
+        <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">Delete Task</a>
     </div>
 </form>
 {% endblock %}
